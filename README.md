@@ -14,3 +14,34 @@ The API must include CRUD (Create Remove Update Delete) operations for both enti
 with validation - you can’t leave members without a house!
 When fetching a house, the API should also be able to return all its members and when
 fetching a member the API should return the data of the house (s)he belongs to.
+
+### Starting backend
+  1 - Create virtual environment to keep our dependeciens isolated and avoid packages conflicts
+  
+    python3 -m venv venv
+    
+  2 - activate virtual env 
+    
+     ubuntu/Mac -> "source venv/bin/activate"
+     Win -> ".\venv\Scripts\activate"
+     
+  3 - Install DJango 
+  
+     $ python -m pip install Django
+     
+  4 - Install Graphene
+  
+    $ pip install graphene-django
+    
+  5 - Install corsheaders to request from  different domain than the one that served the web page
+  
+    pip install django-cors-headers
+    
+  5 - Output a file to save/track our current packages
+  
+    $ pip freeze > requirements.txt
+   Later we can install the same packages from it using : pip install -r requirements.txt
+    
+  6 - Start Django project
+   
+      $ django-admin startproject properties
