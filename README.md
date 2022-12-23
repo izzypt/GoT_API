@@ -8,6 +8,8 @@ The application will have two distinct entities: houses and members. Each house
 represents a family: Stark, Lannister, Baratheon, etc) and members must belong to a house -
 Ned Stark belongs to House Stark.
 
+### Functionality:
+
 The API must include CRUD (Create Remove Update Delete) operations for both entities
 with validation - you can’t leave members without a house!
 When fetching a house, the API should also be able to return all its members and when
