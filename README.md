@@ -23,7 +23,7 @@ fetching a member the API should return the data of the house (s)he belongs to.
       </a>
 </div>
 
-## Backend GraphQL API
+## Backend GraphQL API  
 
 <div align="left">
       <a href="https://www.youtube.com/watch?v=HusM7zZIu3Y">
