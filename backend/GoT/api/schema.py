@@ -17,7 +17,7 @@ class MembersType(DjangoObjectType):
 # MUTATIONS #
 #############
 
-# HOUSE #
+## --> HOUSE <-- ##
 class HouseCreateMutation(graphene.Mutation):
     house = graphene.Field(HouseType)
     
@@ -52,7 +52,7 @@ class HouseDeleteMutation(graphene.Mutation):
     house = graphene.Field(HouseType)
 
     class Arguments:
-        id = graphene.ID(required=True)
+        id = graphene.Int(required=True)
     
     def mutate(self, info, **kwargs):
         id = kwargs.get('id')
@@ -60,29 +60,50 @@ class HouseDeleteMutation(graphene.Mutation):
             house = House.objects.get(pk=id)
             house.delete()
 
-        return HouseCreateMutation(house=house)
+        return HouseCreateMutation(house=None)
 
-# MEMBER #
+## --> MEMBER <-- ##
 class MemberCreateMutation(graphene.Mutation):
     member = graphene.Field(MembersType)
     
     class Arguments:
         name = graphene.String(required=True)
-        house_id = graphene.ID()
+        house_id = graphene.ID(required=True)
 
     def mutate(self, info, **kwargs):
+        #Get Arguments
         name = kwargs.get('name')
         house_id = kwargs.get('house_id')
 
-        member = Members.objects.create(name=name, house=house_id)
+        #Get house object and create member
+        house = House.objects.get(pk=house_id)
+        member = Members.objects.create(name=name, house=house)
 
         return MemberCreateMutation(member=member)
+
+class MemberDeleteMutation(graphene.Mutation):
+    member = graphene.Field(MembersType)
+
+    class Arguments:
+        id = graphene.ID()
+
+    def mutate(self, info, **kwargs):
+        #Get Arguments
+        id = kwargs.get('id')
+
+        #Get member
+        if id is not None:
+            member = Members.objects.get(pk=id)
+            member.delete()
+
+        return MemberDeleteMutation(member=None)
 
 class Mutation:
     create_house = HouseCreateMutation.Field()
     update_house = HouseUpdateMutation.Field()
     delete_house = HouseDeleteMutation.Field()
     create_member = MemberCreateMutation.Field()
+    delete_member = MemberDeleteMutation.Field()
 
 ###########
 # QUERIES #

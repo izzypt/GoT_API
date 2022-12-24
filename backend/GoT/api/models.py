@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class House(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    banner = models.CharField(max_length=350, null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
