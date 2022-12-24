@@ -18,7 +18,7 @@ class MembersType(DjangoObjectType):
 #############
 
 ## --> HOUSE <-- ##
-class HouseCreateMutation(graphene.Mutation):
+class HouseCreate(graphene.Mutation):
     house = graphene.Field(HouseType)
     
     class Arguments:
@@ -28,9 +28,9 @@ class HouseCreateMutation(graphene.Mutation):
         name = kwargs.get('name')
         house = House.objects.create(name=name)
 
-        return HouseCreateMutation(house=house)
+        return HouseCreate(house=house)
 
-class HouseUpdateMutation(graphene.Mutation):
+class HouseUpdate(graphene.Mutation):
     house = graphene.Field(HouseType)
 
     class Arguments:
@@ -46,9 +46,9 @@ class HouseUpdateMutation(graphene.Mutation):
             house.name = name if name is not None else house.name
             house.save()
 
-        return HouseCreateMutation(house=house)
+        return HouseUpdate(house=house)
 
-class HouseDeleteMutation(graphene.Mutation):
+class HouseDelete(graphene.Mutation):
     house = graphene.Field(HouseType)
 
     class Arguments:
@@ -60,7 +60,7 @@ class HouseDeleteMutation(graphene.Mutation):
             house = House.objects.get(pk=id)
             house.delete()
 
-        return HouseCreateMutation(house=None)
+        return HouseDelete(house=None)
 
 ## --> MEMBER <-- ##
 class MemberCreateMutation(graphene.Mutation):
@@ -68,7 +68,7 @@ class MemberCreateMutation(graphene.Mutation):
     
     class Arguments:
         name = graphene.String(required=True)
-        house_id = graphene.ID(required=True)
+        house_id = graphene.Int(required=True)
 
     def mutate(self, info, **kwargs):
         #Get Arguments
@@ -98,11 +98,32 @@ class MemberDeleteMutation(graphene.Mutation):
 
         return MemberDeleteMutation(member=None)
 
+class MemberUpdateMutation(graphene.Mutation):
+    member = graphene.Field(MembersType)
+
+    class Arguments:
+        id = graphene.ID()
+        name = graphene.String()
+
+    def mutate(self, info, **kwargs):
+        #Get Arguments
+        id = kwargs.get('id')
+        name = kwargs.get('name')
+
+        #Get member
+        if id is not None:
+            member = Members.objects.get(pk=id)
+            member.name = name if name is not None else member.name
+            member.save()
+
+        return MemberDeleteMutation(member=member)
+
 class Mutation:
-    create_house = HouseCreateMutation.Field()
-    update_house = HouseUpdateMutation.Field()
-    delete_house = HouseDeleteMutation.Field()
+    create_house = HouseCreate.Field()
+    update_house = HouseUpdate.Field()
+    delete_house = HouseDelete.Field()
     create_member = MemberCreateMutation.Field()
+    update_member = MemberUpdateMutation.Field()
     delete_member = MemberDeleteMutation.Field()
 
 ###########
