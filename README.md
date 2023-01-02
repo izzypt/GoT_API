@@ -15,7 +15,24 @@ with validation - you can’t leave members without a house!
 When fetching a house, the API should also be able to return all its members and when
 fetching a member the API should return the data of the house (s)he belongs to.
 
-### Starting backend
+## FrontEnd Result
+
+<div align="left">
+      <a href="https://www.youtube.com/watch?v=e4pwoi3x2vY">
+         <img src="https://img.youtube.com/vi/e4pwoi3x2vY/0.jpg" style="width:100%;">
+      </a>
+</div>
+
+## Backend GraphQL API  
+
+<div align="left">
+      <a href="https://www.youtube.com/watch?v=HusM7zZIu3Y">
+         <img src="https://img.youtube.com/vi/HusM7zZIu3Y/0.jpg" style="width:100%;">
+      </a>
+</div>
+
+
+## Starting backend
   1 - Create virtual environment to keep our dependeciens isolated and avoid packages conflicts
   
     python3 -m venv venv
