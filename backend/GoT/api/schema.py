@@ -150,3 +150,10 @@ class Query(graphene.ObjectType):
         else:
             return None
 
+    def resolve_member(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return Members.objects.get(pk=id)
+        else:
+            return None
