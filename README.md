@@ -1,6 +1,6 @@
 # GoT_API
 
-### Exercise Description
+### Description
 
 As we are fans of Game of Thrones, we would like to have an application that can
 show the great houses of the Seven Kingdoms with a few members.
