@@ -59,6 +59,3 @@ fetching a member the API should return the data of the house (s)he belongs to.
     $ pip freeze > requirements.txt
    Later we can install the same packages from it using : pip install -r requirements.txt
     
-  6 - Start Django project
-   
-      $ django-admin startproject properties
